@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  financa-organizada:
+    container_name: financa-organizada-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    networks:
+      - financa-organizada-network
+    volumes:
+      - ..:/workspace:cached
+
+  localstack:
+    container_name: financa-organizada-localstack
+    image: localstack/localstack
+    command: sleep infinity
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=localstackAccessKeyId
+      - AWS_SECRET_ACCESS_KEY=localstackSecretAccessKey
+      - AWS_REGION=us-east-1
+      - SERVICES=lambda,s3,cloudformation,apigateway,iam,dynamodb,ses,logs
+      - LAMBDA_EXECUTOR=local
+      - LAMBDA_REMOTE_DOCKER=0
+      - DEBUG=1
+      - EDGE_PORT=4566
+    ports:
+      - "4566-4597:4566-4597"
+    networks:
+      - financa-organizada-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./tmp/localstack:/var/lib/localstack
+
+networks:
+  financa-organizada-network:
+    name: financa-organizada-network
+    driver: bridge
+  host:
+    name: host
+    external: true
+
+volumes:
+  financa-organizada-volume:

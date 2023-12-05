@@ -1,0 +1,19 @@
+{
+  "name": "financa-organizada-api",
+  "description": "Back-End da aplicação Finança Organizada",
+  "scripts": {
+    "start": "sls offline start",
+    "deploy": "sls deploy"
+  },
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-esbuild": "^1.49.0",
+    "serverless-localstack": "^1.1.2",
+    "serverless-offline": "^13.3.0",
+    "serverless-offline-watcher": "^1.1.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.462.0",
+    "uuid": "^9.0.1"
+  }
+}

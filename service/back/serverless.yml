@@ -1,0 +1,66 @@
+service: financa-organizada-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: "local"
+  region: "us-east-1"
+  memorySize: 128
+  timeout: 3
+
+custom:
+  serverless-offline-watcher:
+    - path: src/**/*.ts
+      command: echo "code was modified!"
+  localstack:
+    stages:
+      - local
+    host: http://financa-organizada-localstack
+    edgePort: 4566
+    networkName: financa-organizada-network
+
+plugins:
+  - serverless-offline
+  - serverless-esbuild
+  - serverless-offline-watcher
+  - serverless-localstack
+
+functions:
+  getAccounts:
+    handler: src/handler.getAccounts
+    description: function description
+    events:
+      - http:
+          path: /api/get
+          method: get
+          cors: true
+  postAccounts:
+    handler: src/handler.postAccounts
+    description: function description
+    events:
+      - http:
+          path: /api/post
+          method: post
+          cors: true
+  deleteAccounts:
+    handler: src/handler.deleteAccounts
+    description: function description
+    events:
+      - http:
+          path: /api/delete
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    ContasTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${self:provider.stage}
+        AttributeDefinitions:
+          - AttributeName: userId #TODO: Verificar qual será o correto para ser primary key
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST

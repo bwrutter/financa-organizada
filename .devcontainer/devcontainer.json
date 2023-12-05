@@ -1,0 +1,19 @@
+{
+  "name": "financa-organizada",
+  "service": "financa-organizada",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "node",
+  "dockerComposeFile": "docker-compose.yml",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "humao.rest-client",
+        "Vue.volar",
+        "ZixuanChen.vitest-explorer"
+      ]
+    }
+  }
+}
