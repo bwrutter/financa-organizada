@@ -12,7 +12,7 @@ export async function getAccounts(event: APIGatewayProxyEvent) {
 }
 
 export async function postAccounts(event: APIGatewayProxyEvent) {
-  const body = JSON.parse(event.body || "{}");
+  const body = JSON.parse(event.body);
   const response = await validatePostAccounts(body);
   return response;
 }

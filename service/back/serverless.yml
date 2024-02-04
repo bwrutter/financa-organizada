@@ -2,7 +2,7 @@ service: financa-organizada-api
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
   stage: "local"
   region: "us-east-1"
   memorySize: 128
@@ -53,14 +53,18 @@ functions:
 
 resources:
   Resources:
-    ContasTable:
-      Type: AWS::DynamoDB::Table
+    AccountsTable:
+      Type: "AWS::DynamoDB::Table"
       Properties:
-        TableName: ${self:service}-${self:provider.stage}
+        TableName: AccountsTable
         AttributeDefinitions:
-          - AttributeName: userId #TODO: Verificar qual será o correto para ser primary key
+          - AttributeName: _id
+            AttributeType: S
+          - AttributeName: _name
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
+          - AttributeName: _id
             KeyType: HASH
+          - AttributeName: _name
+            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

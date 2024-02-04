@@ -6,7 +6,7 @@
     },
     "provider": {
       "name": "aws",
-      "runtime": "nodejs18.x",
+      "runtime": "nodejs20.x",
       "stage": "local",
       "region": "us-east-1",
       "memorySize": 128,
@@ -188,10 +188,10 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1701735745321-2023-12-05T00:22:25.321Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
               },
               "Handler": "src/handler.getAccounts",
-              "Runtime": "nodejs18.x",
+              "Runtime": "nodejs20.x",
               "FunctionName": "financa-organizada-api-local-getAccounts",
               "MemorySize": 128,
               "Timeout": 3,
@@ -214,10 +214,10 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1701735745321-2023-12-05T00:22:25.321Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
               },
               "Handler": "src/handler.postAccounts",
-              "Runtime": "nodejs18.x",
+              "Runtime": "nodejs20.x",
               "FunctionName": "financa-organizada-api-local-postAccounts",
               "MemorySize": 128,
               "Timeout": 3,
@@ -240,10 +240,10 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1701735745321-2023-12-05T00:22:25.321Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
               },
               "Handler": "src/handler.deleteAccounts",
-              "Runtime": "nodejs18.x",
+              "Runtime": "nodejs20.x",
               "FunctionName": "financa-organizada-api-local-deleteAccounts",
               "MemorySize": 128,
               "Timeout": 3,
@@ -259,7 +259,7 @@
               "DeleteAccountsLogGroup"
             ]
           },
-          "GetAccountsLambdaVersion5rEDFLrOMgArikTTZBQOjTuTlMPFBMxVy7DT9PtPKls": {
+          "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -270,7 +270,7 @@
               "Description": "function description"
             }
           },
-          "PostAccountsLambdaVersionCehB1dYEhoLj9GbdNt565m2ia3CxBNm0FOcynk083k": {
+          "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -281,7 +281,7 @@
               "Description": "function description"
             }
           },
-          "DeleteAccountsLambdaVersion1jbcujn50wWdQOHxyR5YbjgIlee9qnwh7T0npPV4": {
+          "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -628,7 +628,7 @@
               "DeleteAccountsLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1701735741039": {
+          "ApiGatewayDeployment1707000599226": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -756,20 +756,28 @@
               }
             }
           },
-          "ContasTable": {
+          "AccountsTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "TableName": "financa-organizada-api-local",
+              "TableName": "AccountsTable",
               "AttributeDefinitions": [
                 {
-                  "AttributeName": "userId",
+                  "AttributeName": "_id",
+                  "AttributeType": "S"
+                },
+                {
+                  "AttributeName": "_name",
                   "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
-                  "AttributeName": "userId",
+                  "AttributeName": "_id",
                   "KeyType": "HASH"
+                },
+                {
+                  "AttributeName": "_name",
+                  "KeyType": "RANGE"
                 }
               ],
               "BillingMode": "PAY_PER_REQUEST"
@@ -788,7 +796,7 @@
           "GetAccountsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAccountsLambdaVersion5rEDFLrOMgArikTTZBQOjTuTlMPFBMxVy7DT9PtPKls"
+              "Ref": "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE"
             },
             "Export": {
               "Name": "sls-financa-organizada-api-local-GetAccountsLambdaFunctionQualifiedArn"
@@ -797,7 +805,7 @@
           "PostAccountsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostAccountsLambdaVersionCehB1dYEhoLj9GbdNt565m2ia3CxBNm0FOcynk083k"
+              "Ref": "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ"
             },
             "Export": {
               "Name": "sls-financa-organizada-api-local-PostAccountsLambdaFunctionQualifiedArn"
@@ -806,7 +814,7 @@
           "DeleteAccountsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteAccountsLambdaVersion1jbcujn50wWdQOHxyR5YbjgIlee9qnwh7T0npPV4"
+              "Ref": "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4"
             },
             "Export": {
               "Name": "sls-financa-organizada-api-local-DeleteAccountsLambdaFunctionQualifiedArn"
@@ -981,9 +989,9 @@
         "package": {},
         "memory": 128,
         "timeout": 3,
-        "runtime": "nodejs18.x",
+        "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetAccountsLambdaVersion5rEDFLrOMgArikTTZBQOjTuTlMPFBMxVy7DT9PtPKls"
+        "versionLogicalId": "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE"
       },
       "postAccounts": {
         "handler": "src/handler.postAccounts",
@@ -1018,9 +1026,9 @@
         "package": {},
         "memory": 128,
         "timeout": 3,
-        "runtime": "nodejs18.x",
+        "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "PostAccountsLambdaVersionCehB1dYEhoLj9GbdNt565m2ia3CxBNm0FOcynk083k"
+        "versionLogicalId": "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ"
       },
       "deleteAccounts": {
         "handler": "src/handler.deleteAccounts",
@@ -1055,27 +1063,35 @@
         "package": {},
         "memory": 128,
         "timeout": 3,
-        "runtime": "nodejs18.x",
+        "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "DeleteAccountsLambdaVersion1jbcujn50wWdQOHxyR5YbjgIlee9qnwh7T0npPV4"
+        "versionLogicalId": "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4"
       }
     },
     "resources": {
       "Resources": {
-        "ContasTable": {
+        "AccountsTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "financa-organizada-api-local",
+            "TableName": "AccountsTable",
             "AttributeDefinitions": [
               {
-                "AttributeName": "userId",
+                "AttributeName": "_id",
+                "AttributeType": "S"
+              },
+              {
+                "AttributeName": "_name",
                 "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
-                "AttributeName": "userId",
+                "AttributeName": "_id",
                 "KeyType": "HASH"
+              },
+              {
+                "AttributeName": "_name",
+                "KeyType": "RANGE"
               }
             ],
             "BillingMode": "PAY_PER_REQUEST"
@@ -1108,7 +1124,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/financa-organizada-api/local/1701735745321-2023-12-05T00:22:25.321Z",
+    "artifactDirectoryName": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z",
     "artifact": "financa-organizada-api.zip"
   }
 }

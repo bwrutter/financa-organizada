@@ -34,6 +34,18 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./tmp/localstack:/var/lib/localstack
 
+  dynamodb-admin:
+    container_name: financa-organizada-dynamodb-admin
+    depends_on:
+      - localstack
+    image: aaronshaf/dynamodb-admin
+    networks:
+      - financa-organizada-network
+    ports:
+      - 8001:8001
+    environment:
+      - DYNAMO_ENDPOINT=http://localstack:4566
+
 networks:
   financa-organizada-network:
     name: financa-organizada-network

@@ -16,44 +16,43 @@ const dynamoDBClient = new DynamoDBClient({
   endpoint: "http://financa-organizada-localstack:4566",
 });
 
-const tableName = "financa-organizada-api-local";
+const tableName = "AccountsTable";
 
+//TODO: Ajsutar os returns
 export async function createAccount(contas: ContaPost) {
-  const accountId = uuidv4(); //TODO: Incluir alguma checagem para verificar se a conta ja existe, pelo nome, valor e tipo coincidirem
-  const { nome, valor, tipo } = contas;
-  const userId = "123"; //TODO: Vir por parametro automaticamente no futuro
+  const _id = uuidv4();
+  const { name, value } = contas;
   const params = {
     TableName: tableName,
     Item: {
-      accountId: { S: accountId },
-      userId: { S: userId },
-      nome: { S: nome },
-      tipo: { S: tipo },
-      valor: { N: valor.toString() },
+      _id: { S: _id },
+      _name: { S: name },
+      value: { N: value.toString() },
     },
   };
 
   try {
     const response = await dynamoDBClient.send(new PutItemCommand(params));
-    return JSON.stringify(response);
+    return JSON.parse(JSON.stringify(params));
   } catch (error) {
     console.error("Erro ao criar item:", error);
     throw error;
   }
 }
 
-export async function getAccounts(param: string) {
+export async function getAccounts(param: any) {
   const params = {
     TableName: tableName,
     Key: {
-      userId: { S: param },
+      _id: { S: param.id },
+      _name: { S: "Nome da Conta" },
     },
   };
 
   try {
     const response = await dynamoDBClient.send(new GetItemCommand(params));
     if (response.Item) {
-      return JSON.stringify(response.Item);
+      return JSON.parse(JSON.stringify(response.Item));
     } else {
       return { message: "Item não encontrado" };
     }
@@ -63,17 +62,17 @@ export async function getAccounts(param: string) {
   }
 }
 
-export async function deleteAccount(param: string) {
+export async function deleteAccount(param: any) {
   const params = {
     TableName: tableName,
     Key: {
-      userId: { S: param },
+      _id: { S: param.id },
     },
   };
 
   try {
     const response = await dynamoDBClient.send(new DeleteItemCommand(params));
-    return JSON.stringify(response);
+    return JSON.parse(JSON.stringify(response));
   } catch (error) {
     console.error("Erro ao deletar item:", error);
     throw error;
@@ -81,7 +80,7 @@ export async function deleteAccount(param: string) {
 }
 
 type ContaPost = {
-  nome: string;
-  valor: number;
-  tipo: string;
+  id: string;
+  name: string;
+  value: number;
 };

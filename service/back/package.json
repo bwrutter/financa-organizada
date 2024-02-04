@@ -3,7 +3,7 @@
   "description": "Back-End da aplicação Finança Organizada",
   "scripts": {
     "start": "sls offline start",
-    "deploy": "sls deploy"
+    "deploy": "sls deploy --stage local"
   },
   "devDependencies": {
     "serverless": "^3.38.0",
@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.462.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "zod": "^3.22.4"
   }
 }

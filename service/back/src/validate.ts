@@ -1,43 +1,26 @@
 import { createAccount, getAccounts, deleteAccount } from "./dynamo.ts";
 
+//TODO: Ajsutar os returns
 export async function validateGetAccounts(params: any) {
-  if (params) {
-    const response = await getAccounts(params.userId);
-    return {
-      statusCode: 200,
-      body: response,
-    };
-  } else {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "Campo não informado",
-      }),
-    };
-  }
+  const response = await getAccounts(params);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: response,
+    }),
+  };
 }
 
 export async function validatePostAccounts(body: Account) {
-  const { nome, valor, tipo } = body;
-  if (nome || valor || tipo) {
-    await createAccount(body);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: "Account criada com sucesso",
-      }),
-    };
-  } else {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({
-        message: "Campo não informado",
-      }),
-    };
-  }
+  const response = await createAccount(body);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: response,
+    }),
+  };
 }
 
-//TODO: Verificar se é necessario incluir userId no delete, tendo em vista que o accountId(uuid) é unico
 export async function validateDeleteAccounts(params: any) {
   if (params) {
     const response = await deleteAccount(params.accountId);
@@ -56,8 +39,7 @@ export async function validateDeleteAccounts(params: any) {
 }
 
 type Account = {
-  userId: string;
-  nome: string;
-  valor: number;
-  tipo: string;
+  id: string;
+  name: string;
+  value: number;
 };
