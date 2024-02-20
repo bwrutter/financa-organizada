@@ -85,22 +85,28 @@
               }
             }
           },
-          "GetAccountsLogGroup": {
+          "GetAccountLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/financa-organizada-api-local-getAccounts"
+              "LogGroupName": "/aws/lambda/financa-organizada-api-local-getAccount"
             }
           },
-          "PostAccountsLogGroup": {
+          "PostAccountLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/financa-organizada-api-local-postAccounts"
+              "LogGroupName": "/aws/lambda/financa-organizada-api-local-postAccount"
             }
           },
-          "DeleteAccountsLogGroup": {
+          "PutAccountLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/financa-organizada-api-local-deleteAccounts"
+              "LogGroupName": "/aws/lambda/financa-organizada-api-local-putAccount"
+            }
+          },
+          "DeleteAccountLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/financa-organizada-api-local-deleteAccount"
             }
           },
           "IamRoleLambdaExecution": {
@@ -181,18 +187,18 @@
               }
             }
           },
-          "GetAccountsLambdaFunction": {
+          "GetAccountLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1708453160837-2024-02-20T18:19:20.837Z/financa-organizada-api.zip"
               },
-              "Handler": "src/handler.getAccounts",
+              "Handler": "src/handler.getAccount",
               "Runtime": "nodejs20.x",
-              "FunctionName": "financa-organizada-api-local-getAccounts",
+              "FunctionName": "financa-organizada-api-local-getAccount",
               "MemorySize": 128,
               "Timeout": 3,
               "Description": "function description",
@@ -204,21 +210,21 @@
               }
             },
             "DependsOn": [
-              "GetAccountsLogGroup"
+              "GetAccountLogGroup"
             ]
           },
-          "PostAccountsLambdaFunction": {
+          "PostAccountLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1708453160837-2024-02-20T18:19:20.837Z/financa-organizada-api.zip"
               },
-              "Handler": "src/handler.postAccounts",
+              "Handler": "src/handler.postAccount",
               "Runtime": "nodejs20.x",
-              "FunctionName": "financa-organizada-api-local-postAccounts",
+              "FunctionName": "financa-organizada-api-local-postAccount",
               "MemorySize": 128,
               "Timeout": 3,
               "Description": "function description",
@@ -230,21 +236,21 @@
               }
             },
             "DependsOn": [
-              "PostAccountsLogGroup"
+              "PostAccountLogGroup"
             ]
           },
-          "DeleteAccountsLambdaFunction": {
+          "PutAccountLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
               "Code": {
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z/financa-organizada-api.zip"
+                "S3Key": "serverless/financa-organizada-api/local/1708453160837-2024-02-20T18:19:20.837Z/financa-organizada-api.zip"
               },
-              "Handler": "src/handler.deleteAccounts",
+              "Handler": "src/handler.putAccount",
               "Runtime": "nodejs20.x",
-              "FunctionName": "financa-organizada-api-local-deleteAccounts",
+              "FunctionName": "financa-organizada-api-local-putAccount",
               "MemorySize": 128,
               "Timeout": 3,
               "Description": "function description",
@@ -256,39 +262,76 @@
               }
             },
             "DependsOn": [
-              "DeleteAccountsLogGroup"
+              "PutAccountLogGroup"
             ]
           },
-          "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE": {
+          "DeleteAccountLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/financa-organizada-api/local/1708453160837-2024-02-20T18:19:20.837Z/financa-organizada-api.zip"
+              },
+              "Handler": "src/handler.deleteAccount",
+              "Runtime": "nodejs20.x",
+              "FunctionName": "financa-organizada-api-local-deleteAccount",
+              "MemorySize": 128,
+              "Timeout": 3,
+              "Description": "function description",
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "DeleteAccountLogGroup"
+            ]
+          },
+          "GetAccountLambdaVersioneZZcnbt3J91hhScU7qROZPruIS6JUJh6ZsoxQgMer0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetAccountsLambdaFunction"
+                "Ref": "GetAccountLambdaFunction"
               },
-              "CodeSha256": "/2E8KEZFmb/XzvxsJPYH87aVaxJjZJkWl6K/WMmal80=",
+              "CodeSha256": "bN+ItOa4KjCiPJ1U3SfK5Ge5NmjRdbCNyv/W0g+5NV0=",
               "Description": "function description"
             }
           },
-          "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ": {
+          "PostAccountLambdaVersion7kUyedA9IJRj08YbUip1b1KD7z7wrDKectai8Ljm8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "PostAccountsLambdaFunction"
+                "Ref": "PostAccountLambdaFunction"
               },
-              "CodeSha256": "/2E8KEZFmb/XzvxsJPYH87aVaxJjZJkWl6K/WMmal80=",
+              "CodeSha256": "bN+ItOa4KjCiPJ1U3SfK5Ge5NmjRdbCNyv/W0g+5NV0=",
               "Description": "function description"
             }
           },
-          "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4": {
+          "PutAccountLambdaVersionNYbpZTSgYbMJCkIhG36EuLkLtnFmeOTUensLXiE3zBY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "DeleteAccountsLambdaFunction"
+                "Ref": "PutAccountLambdaFunction"
               },
-              "CodeSha256": "/2E8KEZFmb/XzvxsJPYH87aVaxJjZJkWl6K/WMmal80=",
+              "CodeSha256": "bN+ItOa4KjCiPJ1U3SfK5Ge5NmjRdbCNyv/W0g+5NV0=",
+              "Description": "function description"
+            }
+          },
+          "DeleteAccountLambdaVersioniCXYLupZ2XW35SoEo5gVqGWuyY03m48tEFLt1ldwCs": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteAccountLambdaFunction"
+              },
+              "CodeSha256": "bN+ItOa4KjCiPJ1U3SfK5Ge5NmjRdbCNyv/W0g+5NV0=",
               "Description": "function description"
             }
           },
@@ -338,6 +381,18 @@
                 "Ref": "ApiGatewayResourceApi"
               },
               "PathPart": "post",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceApiPut": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceApi"
+              },
+              "PathPart": "put",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -445,6 +500,51 @@
               }
             }
           },
+          "ApiGatewayMethodApiPutOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent,X-Amzn-Trace-Id'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": ""
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiPut"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodApiDeleteOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -521,7 +621,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "GetAccountsLambdaFunction",
+                          "GetAccountLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -533,7 +633,7 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "GetAccountsLambdaPermissionApiGateway"
+              "GetAccountLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodApiPostPost": {
@@ -567,7 +667,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "PostAccountsLambdaFunction",
+                          "PostAccountLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -579,7 +679,53 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "PostAccountsLambdaPermissionApiGateway"
+              "PostAccountLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodApiPutPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceApiPut"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "PutAccountLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "PutAccountLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodApiDeleteDelete": {
@@ -613,7 +759,7 @@
                       ":lambda:path/2015-03-31/functions/",
                       {
                         "Fn::GetAtt": [
-                          "DeleteAccountsLambdaFunction",
+                          "DeleteAccountLambdaFunction",
                           "Arn"
                         ]
                       },
@@ -625,10 +771,10 @@
               "MethodResponses": []
             },
             "DependsOn": [
-              "DeleteAccountsLambdaPermissionApiGateway"
+              "DeleteAccountLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1707000599226": {
+          "ApiGatewayDeployment1708453157498": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -639,18 +785,20 @@
             "DependsOn": [
               "ApiGatewayMethodApiGetOptions",
               "ApiGatewayMethodApiPostOptions",
+              "ApiGatewayMethodApiPutOptions",
               "ApiGatewayMethodApiDeleteOptions",
               "ApiGatewayMethodApiGetGet",
               "ApiGatewayMethodApiPostPost",
+              "ApiGatewayMethodApiPutPut",
               "ApiGatewayMethodApiDeleteDelete"
             ]
           },
-          "GetAccountsLambdaPermissionApiGateway": {
+          "GetAccountLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "GetAccountsLambdaFunction",
+                  "GetAccountLambdaFunction",
                   "Arn"
                 ]
               },
@@ -682,12 +830,12 @@
               }
             }
           },
-          "PostAccountsLambdaPermissionApiGateway": {
+          "PostAccountLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "PostAccountsLambdaFunction",
+                  "PostAccountLambdaFunction",
                   "Arn"
                 ]
               },
@@ -719,12 +867,49 @@
               }
             }
           },
-          "DeleteAccountsLambdaPermissionApiGateway": {
+          "PutAccountLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
                 "Fn::GetAtt": [
-                  "DeleteAccountsLambdaFunction",
+                  "PutAccountLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "DeleteAccountLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteAccountLambdaFunction",
                   "Arn"
                 ]
               },
@@ -764,20 +949,12 @@
                 {
                   "AttributeName": "_id",
                   "AttributeType": "S"
-                },
-                {
-                  "AttributeName": "_name",
-                  "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
                   "AttributeName": "_id",
                   "KeyType": "HASH"
-                },
-                {
-                  "AttributeName": "_name",
-                  "KeyType": "RANGE"
                 }
               ],
               "BillingMode": "PAY_PER_REQUEST"
@@ -793,31 +970,40 @@
               "Name": "sls-financa-organizada-api-local-ServerlessDeploymentBucketName"
             }
           },
-          "GetAccountsLambdaFunctionQualifiedArn": {
+          "GetAccountLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE"
+              "Ref": "GetAccountLambdaVersioneZZcnbt3J91hhScU7qROZPruIS6JUJh6ZsoxQgMer0"
             },
             "Export": {
-              "Name": "sls-financa-organizada-api-local-GetAccountsLambdaFunctionQualifiedArn"
+              "Name": "sls-financa-organizada-api-local-GetAccountLambdaFunctionQualifiedArn"
             }
           },
-          "PostAccountsLambdaFunctionQualifiedArn": {
+          "PostAccountLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ"
+              "Ref": "PostAccountLambdaVersion7kUyedA9IJRj08YbUip1b1KD7z7wrDKectai8Ljm8"
             },
             "Export": {
-              "Name": "sls-financa-organizada-api-local-PostAccountsLambdaFunctionQualifiedArn"
+              "Name": "sls-financa-organizada-api-local-PostAccountLambdaFunctionQualifiedArn"
             }
           },
-          "DeleteAccountsLambdaFunctionQualifiedArn": {
+          "PutAccountLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4"
+              "Ref": "PutAccountLambdaVersionNYbpZTSgYbMJCkIhG36EuLkLtnFmeOTUensLXiE3zBY"
             },
             "Export": {
-              "Name": "sls-financa-organizada-api-local-DeleteAccountsLambdaFunctionQualifiedArn"
+              "Name": "sls-financa-organizada-api-local-PutAccountLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteAccountLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteAccountLambdaVersioniCXYLupZ2XW35SoEo5gVqGWuyY03m48tEFLt1ldwCs"
+            },
+            "Export": {
+              "Name": "sls-financa-organizada-api-local-DeleteAccountLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -956,8 +1142,8 @@
     ],
     "pluginsData": {},
     "functions": {
-      "getAccounts": {
-        "handler": "src/handler.getAccounts",
+      "getAccount": {
+        "handler": "src/handler.getAccount",
         "description": "function description",
         "events": [
           {
@@ -985,16 +1171,16 @@
             }
           }
         ],
-        "name": "financa-organizada-api-local-getAccounts",
+        "name": "financa-organizada-api-local-getAccount",
         "package": {},
         "memory": 128,
         "timeout": 3,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "GetAccountsLambdaVersionxBofAOdfkk6wBNeAr6eTChr50MU0j0GfLREZrXbMwE"
+        "versionLogicalId": "GetAccountLambdaVersioneZZcnbt3J91hhScU7qROZPruIS6JUJh6ZsoxQgMer0"
       },
-      "postAccounts": {
-        "handler": "src/handler.postAccounts",
+      "postAccount": {
+        "handler": "src/handler.postAccount",
         "description": "function description",
         "events": [
           {
@@ -1022,16 +1208,53 @@
             }
           }
         ],
-        "name": "financa-organizada-api-local-postAccounts",
+        "name": "financa-organizada-api-local-postAccount",
         "package": {},
         "memory": 128,
         "timeout": 3,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "PostAccountsLambdaVersion1Zk8qnBe04FhjbYAzekSzNhsl8O88aKX6dUoaPgOVQ"
+        "versionLogicalId": "PostAccountLambdaVersion7kUyedA9IJRj08YbUip1b1KD7z7wrDKectai8Ljm8"
       },
-      "deleteAccounts": {
-        "handler": "src/handler.deleteAccounts",
+      "putAccount": {
+        "handler": "src/handler.putAccount",
+        "description": "function description",
+        "events": [
+          {
+            "http": {
+              "path": "api/put",
+              "method": "put",
+              "cors": {
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "PUT"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent",
+                  "X-Amzn-Trace-Id"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "financa-organizada-api-local-putAccount",
+        "package": {},
+        "memory": 128,
+        "timeout": 3,
+        "runtime": "nodejs20.x",
+        "vpc": {},
+        "versionLogicalId": "PutAccountLambdaVersionNYbpZTSgYbMJCkIhG36EuLkLtnFmeOTUensLXiE3zBY"
+      },
+      "deleteAccount": {
+        "handler": "src/handler.deleteAccount",
         "description": "function description",
         "events": [
           {
@@ -1059,13 +1282,13 @@
             }
           }
         ],
-        "name": "financa-organizada-api-local-deleteAccounts",
+        "name": "financa-organizada-api-local-deleteAccount",
         "package": {},
         "memory": 128,
         "timeout": 3,
         "runtime": "nodejs20.x",
         "vpc": {},
-        "versionLogicalId": "DeleteAccountsLambdaVersionsrqPwEspWO7CPvIIiZQn7zm4jyZK52WgWDSLrSMMYQ4"
+        "versionLogicalId": "DeleteAccountLambdaVersioniCXYLupZ2XW35SoEo5gVqGWuyY03m48tEFLt1ldwCs"
       }
     },
     "resources": {
@@ -1078,20 +1301,12 @@
               {
                 "AttributeName": "_id",
                 "AttributeType": "S"
-              },
-              {
-                "AttributeName": "_name",
-                "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
                 "AttributeName": "_id",
                 "KeyType": "HASH"
-              },
-              {
-                "AttributeName": "_name",
-                "KeyType": "RANGE"
               }
             ],
             "BillingMode": "PAY_PER_REQUEST"
@@ -1124,7 +1339,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/financa-organizada-api/local/1707000601779-2024-02-03T22:50:01.779Z",
+    "artifactDirectoryName": "serverless/financa-organizada-api/local/1708453160837-2024-02-20T18:19:20.837Z",
     "artifact": "financa-organizada-api.zip"
   }
 }

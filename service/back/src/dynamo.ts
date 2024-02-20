@@ -20,6 +20,7 @@ const tableName = "AccountsTable";
 
 //TODO: Ajsutar os returns
 export async function createAccount(contas: ContaPost) {
+  console.log(contas);
   const _id = uuidv4();
   const { name, value } = contas;
   const params = {
@@ -40,12 +41,11 @@ export async function createAccount(contas: ContaPost) {
   }
 }
 
-export async function getAccounts(param: any) {
+export async function getAccount(param: any) {
   const params = {
     TableName: tableName,
     Key: {
       _id: { S: param.id },
-      _name: { S: "Nome da Conta" },
     },
   };
 
@@ -72,9 +72,43 @@ export async function deleteAccount(param: any) {
 
   try {
     const response = await dynamoDBClient.send(new DeleteItemCommand(params));
-    return JSON.parse(JSON.stringify(response));
+    return JSON.stringify(response);
   } catch (error) {
     console.error("Erro ao deletar item:", error);
+    throw error;
+  }
+}
+
+export async function updateAccount(param: ContaPost) {
+  const { id, name, value } = param;
+
+  const updateExpression = "SET #name = :name, #value = :value";
+
+  const expressionAttributeNames = {
+    "#name": "_name",
+    "#value": "value",
+  };
+
+  const expressionAttributeValues = {
+    ":name": { S: name },
+    ":value": { N: value.toString() },
+  };
+
+  const params = {
+    TableName: tableName,
+    Key: {
+      _id: { S: id },
+    },
+    UpdateExpression: updateExpression,
+    ExpressionAttributeNames: expressionAttributeNames,
+    ExpressionAttributeValues: expressionAttributeValues,
+  };
+
+  try {
+    const response = await dynamoDBClient.send(new UpdateItemCommand(params));
+    return JSON.parse(JSON.stringify(response));
+  } catch (error) {
+    console.error("Erro ao atualizar item:", error);
     throw error;
   }
 }

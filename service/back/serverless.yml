@@ -26,24 +26,32 @@ plugins:
   - serverless-localstack
 
 functions:
-  getAccounts:
-    handler: src/handler.getAccounts
+  getAccount:
+    handler: src/handler.getAccount
     description: function description
     events:
       - http:
           path: /api/get
           method: get
           cors: true
-  postAccounts:
-    handler: src/handler.postAccounts
+  postAccount:
+    handler: src/handler.postAccount
     description: function description
     events:
       - http:
           path: /api/post
           method: post
           cors: true
-  deleteAccounts:
-    handler: src/handler.deleteAccounts
+  putAccount:
+    handler: src/handler.putAccount
+    description: function description
+    events:
+      - http:
+          path: /api/put
+          method: put
+          cors: true
+  deleteAccount:
+    handler: src/handler.deleteAccount
     description: function description
     events:
       - http:
@@ -60,11 +68,7 @@ resources:
         AttributeDefinitions:
           - AttributeName: _id
             AttributeType: S
-          - AttributeName: _name
-            AttributeType: S
         KeySchema:
           - AttributeName: _id
             KeyType: HASH
-          - AttributeName: _name
-            KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
