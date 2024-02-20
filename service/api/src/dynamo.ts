@@ -4,6 +4,7 @@ import {
   GetItemCommand,
   UpdateItemCommand,
   DeleteItemCommand,
+  ScanCommand,
 } from "@aws-sdk/client-dynamodb";
 import { v4 as uuidv4 } from "uuid";
 
@@ -18,6 +19,7 @@ const dynamoDBClient = new DynamoDBClient({
 
 const tableName = "AccountsTable";
 
+//TODO: Futuramente, quando tiver varios usuarios, adicionar o id do usuario na tabela.
 //TODO: Ajsutar os returns
 export async function createAccount(contas: ContaPost) {
   console.log(contas);
@@ -41,7 +43,7 @@ export async function createAccount(contas: ContaPost) {
   }
 }
 
-export async function getAccount(param: any) {
+export async function getAccount(param: ContaPost) {
   const params = {
     TableName: tableName,
     Key: {
@@ -62,7 +64,21 @@ export async function getAccount(param: any) {
   }
 }
 
-export async function deleteAccount(param: any) {
+export async function getAllAccounts() {
+  const params = {
+    TableName: tableName,
+  };
+
+  try {
+    const response = await dynamoDBClient.send(new ScanCommand(params));
+    return JSON.parse(JSON.stringify(response.Items));
+  } catch (error) {
+    console.error("Erro ao buscar todos os itens:", error.message || error);
+    throw error;
+  }
+}
+
+export async function deleteAccount(param: ContaPost) {
   const params = {
     TableName: tableName,
     Key: {

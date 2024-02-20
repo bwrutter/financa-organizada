@@ -1,8 +1,5 @@
 @url = http://localhost:3000/local/api
 
-###
-# @name getAccount
-GET {{url}}/get?id=89cb6b37-43fd-4107-9ad4-0ff5bf1c933f
 
 ###
 # @name createAccount
@@ -15,14 +12,23 @@ Content-Type: application/json
 }
 
 ###
+# @name getAll
+GET {{url}}/getAll
+Content-Type: application/json
+
+###
+# @name getAccount
+GET {{url}}/get?id=89cb6b37-43fd-4107-9ad4-0ff5bf1c933f
+
+###
 # @name updateAccount
 PUT {{url}}/put
 Content-Type: application/json
 
 {
   "id": "89cb6b37-43fd-4107-9ad4-0ff5bf1c933f",
-  "name": "Amazon Prime",
-  "value": 21
+  "name": "Netflix",
+  "value": 30
 }
 
 ###

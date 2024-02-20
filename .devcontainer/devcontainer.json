@@ -12,7 +12,8 @@
         "GitHub.copilot",
         "humao.rest-client",
         "Vue.volar",
-        "ZixuanChen.vitest-explorer"
+        "ZixuanChen.vitest-explorer",
+        "vitest.explorer"
       ]
     }
   }

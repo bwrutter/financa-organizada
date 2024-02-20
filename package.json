@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "App de finanças pessoais",
   "scripts": {
+    "start": "./scripts/start.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [
-    "service/back"
+    "client/app",
+    "service/api"
   ],
   "author": "Bryan Rutter",
   "license": "MIT",

@@ -34,6 +34,14 @@ functions:
           path: /api/get
           method: get
           cors: true
+  getAllAccounts:
+    handler: src/handler.getAllAccounts
+    description: function description
+    events:
+      - http:
+          path: /api/getAll
+          method: get
+          cors: true
   postAccount:
     handler: src/handler.postAccount
     description: function description

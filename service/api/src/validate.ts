@@ -3,10 +3,11 @@ import {
   getAccount,
   deleteAccount,
   updateAccount,
+  getAllAccounts,
 } from "./dynamo.ts";
 
 //TODO: Ajsutar os returns
-export async function validategetAccount(params: any) {
+export async function validateGetAccount(params: Account) {
   const response = await getAccount(params);
   return {
     statusCode: 200,
@@ -16,7 +17,7 @@ export async function validategetAccount(params: any) {
   };
 }
 
-export async function validatepostAccount(body: Account) {
+export async function validatePostAccount(body: Account) {
   const response = await createAccount(body);
   return {
     statusCode: 200,
@@ -26,7 +27,7 @@ export async function validatepostAccount(body: Account) {
   };
 }
 
-export async function validatedeleteAccount(params: any) {
+export async function validateDeleteAccount(params: Account) {
   if (params) {
     const response = await deleteAccount(params);
     return {
@@ -45,6 +46,16 @@ export async function validatedeleteAccount(params: any) {
 
 export async function validateUpdateAccount(body: Account) {
   const response = await updateAccount(body);
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: response,
+    }),
+  };
+}
+
+export async function validateGetAllAccounts() {
+  const response = await getAllAccounts();
   return {
     statusCode: 200,
     body: JSON.stringify({
