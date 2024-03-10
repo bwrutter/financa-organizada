@@ -1,11 +1,14 @@
+<script setup lang="ts">
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
 <template>
-  <v-app>
-    <v-main>
-      <Cadastro/>
-    </v-main>
-  </v-app>
+  <div>
+    <HelloWorld/>
+  </div>
 </template>
 
-<script setup lang="ts">
-  //
-</script>
+<style>
+
+
+</style>

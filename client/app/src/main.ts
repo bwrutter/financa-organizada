@@ -1,20 +1,10 @@
-/**
- * main.ts
- *
- * Bootstraps Vuetify and other plugins then mounts the App`
- */
-
-// Plugins
-import { registerPlugins } from "@/plugins";
-
-// Components
-import App from "./App.vue";
-
-// Composables
 import { createApp } from "vue";
+import "./style.css";
+import App from "./App.vue";
+import { Quasar } from "quasar";
+import "@quasar/extras/material-icons/material-icons.css";
+import "quasar/src/css/index.sass";
 
-const app = createApp(App);
+const app = createApp(App).use(Quasar, {}).mount("#app");
 
-registerPlugins(app);
-
-app.mount("#app");
+export default app;

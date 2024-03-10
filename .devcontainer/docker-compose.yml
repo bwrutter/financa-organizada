@@ -26,6 +26,7 @@ services:
       - LAMBDA_REMOTE_DOCKER=0
       - DEBUG=1
       - EDGE_PORT=4566
+      - PERSISTENCE=1
     ports:
       - "4566-4597:4566-4597"
     networks:
